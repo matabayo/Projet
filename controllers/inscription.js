@@ -9,7 +9,7 @@ export const register = (req, res) => {
     res.render('layout', {template: 'register'});
 }
 
-export const registerSubmit = function (req, res) {
+export const registerSubmit =  (req, res) => {
 
     // recuperation des données du formulaire dans req.body
     const {email, pseudo, password, confirmPassword} = req.body;
