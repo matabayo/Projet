@@ -9,10 +9,50 @@
 
 html {
     font-size: 62.5%;
+    padding : 0;
 }
 
 
 
 body {
     font-size: 1.6rem;
+    margin: 0;
+}
+
+
+
+/*******************************************
+*************** style logo *****************
+*******************************************/
+
+.logo {
+    /*position: relative;*/
+    width: 10%;
+
+}
+.img {
+    width: 3rem;
+}
+
+/******************************************
+*************background style**************
+******************************************/
+.position {
+    position : relative;
+}
+
+.test {
+    display: flex;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.container {
+    opacity: 0.6;
+	max-width: 100%;
+	height: auto;
 }

@@ -7,20 +7,20 @@ import bcrypt from "bcrypt"; // module npm pour crypter les mots de passe
 
 export const register = (req, res) => {
     res.render('layout', {template: 'register'});
-}
+};
 
 export const registerSubmit =  (req, res) => {
 
     // recuperation des données du formulaire dans req.body
-    const {email, pseudo, password, confirmPassword} = req.body;
+    const {pseudo, email, password, confirmPassword} = req.body;
 
     // regex pour l'email (format valide) et pour le pseudo (pas de caractères spéciaux)
     const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,3}$/;
     const inputRegex = /^[a-zA-Z0-9\s]+$/;
 
     // protection contre les failles XSS (cross-site scripting)
-    const safeEmail = xss.escapeHtml(email);
     const safePseudo = xss.escapeHtml(pseudo);
+    const safeEmail = xss.escapeHtml(email);
     const safePassword = xss.escapeHtml(password);
     const safeConfirmPassword = xss.escapeHtml(confirmPassword);
 
@@ -32,10 +32,10 @@ export const registerSubmit =  (req, res) => {
         return res.status(400).send('Le pseudo doit contenir au moins 3 caractères et ne doit pas contenir de caractères spéciaux');
     }
     if (safePassword.length < 8) {
-        return res.status(400).send('Le mot de passe doit contenir au moins 8 caractères et ne doit pas contenir de caractères spéciaux');
+        return res.status(400).send('Le mot de passe doit contenir au moins 8 caractères');
     }
     if (safeConfirmPassword !== safePassword ) {
-        return res.status(400).send('La confirmation du mot de passe ne correspond pas ou contient des caractères spéciaux');
+        return res.status(400).send('La confirmation du mot de passe ne correspond pas');
     }
 
     // cryptage du mot de passe avec bcrypt
