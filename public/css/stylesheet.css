@@ -43,7 +43,7 @@ body {
 
 .test {
     display: flex;
-    position: absolute;
+    /*position: absolute;*/
     left: 0;
     top: 0;
     width: 100%;
@@ -55,4 +55,9 @@ body {
     opacity: 0.6;
 	max-width: 100%;
 	height: auto;
+}
+
+.form {
+    /*position : absolute;*/
+    z-index: 1000;
 }

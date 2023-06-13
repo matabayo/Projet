@@ -10,10 +10,10 @@ export const Login = (req,res) => {
 // vérification des données pour le login
 export const loginSubmit = (req,res) => {
     // récupération des valeurs des inputs
-    const {email, password} = req.body;
+    const {login, password} = req.body;
 
     // vérification que l'email est dans la base de données
-    pool.query('SELECT * From users WHERE email = ?', [email], function (error, result) {
+    pool.query('SELECT * From user WHERE email = ? OR pseudo = ?', [login, login], function (error, result) {
     
         // si l'email n'est pas dans la base de données alors on renvoit une erreur 500 avec le message suivant 'erreur de base de données'
         if(error) {

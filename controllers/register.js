@@ -54,7 +54,7 @@ export const registerSubmit =  (req, res) => {
             };
 
             // requète SQL pour insérer les données du formulaire dans la table users
-            let query = "INSERT INTO users SET ?";
+            let query = "INSERT INTO user SET ?";
 
             // execution de la requète SQL avec les données de l'objet newUsers
             pool.query(query, [newUsers], function (error, result) {

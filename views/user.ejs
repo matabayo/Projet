@@ -1,0 +1,17 @@
+<section>
+    <div class="test"> <img src = "img/background.png" alt="image de fond" class="container"></div>
+    <article class="form">
+         <thead>
+            <th>Liste des jeux</th>
+         </thead>
+         <tbody>
+             <% for(let i =0 ; i < posts.length ; i++){ %>
+             <tr>
+                 <td>
+                     <a class="game" href="/game/<%=posts[i].id%>"><%=posts[i].name%></a>
+                 </td>
+             </tr>    
+         <%    }   %>
+         </tbody>
+    </article>
+</section>
