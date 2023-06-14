@@ -1,4 +1,3 @@
-export default function(req) {
-    req.session.isAdmin = true;
+export const connexion = function(req) {
     req.session.isUser = true;
-}
+};

@@ -1,3 +1,13 @@
-<form>
-    
-</form>
+<section>
+    <form method="post" action ="/createGame">
+        <input type = "text" name = "name" placeholder = "nom de la partie">
+        <select name = "gameType"> 
+            <% for (let i = 0 ; i < types.length ; i++) { %>
+            <option value = "<%= types[i].id%>">
+                <%= types[i].name %>
+            </option>
+            <% } %>
+        </select>
+        <button type = "submit">Créer</button>
+    </form>
+</section>

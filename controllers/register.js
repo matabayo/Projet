@@ -19,10 +19,10 @@ export const registerSubmit =  (req, res) => {
     const inputRegex = /^[a-zA-Z0-9\s]+$/;
 
     // protection contre les failles XSS (cross-site scripting)
-    const safePseudo = xss.escapeHtml(pseudo);
-    const safeEmail = xss.escapeHtml(email);
-    const safePassword = xss.escapeHtml(password);
-    const safeConfirmPassword = xss.escapeHtml(confirmPassword);
+    const safePseudo = xss(pseudo);
+    const safeEmail = xss(email);
+    const safePassword = xss(password);
+    const safeConfirmPassword = xss(confirmPassword);
 
     // vérification des données du formulaire si les données ne sont pas valides, on renvoie un message d'erreur
     if (!emailRegex.test(safeEmail)) {
@@ -50,7 +50,7 @@ export const registerSubmit =  (req, res) => {
                 pseudo: safePseudo,
                 email: safeEmail,
                 password: hash, // le mot de passe crypté
-                role: "Membre" // par défaut, le role est "Membre"
+                role: "player" // par défaut, le role est "player"
             };
 
             // requète SQL pour insérer les données du formulaire dans la table users
@@ -71,4 +71,4 @@ export const registerSubmit =  (req, res) => {
             });
         }
     });
-}
+};
