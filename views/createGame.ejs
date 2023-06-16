@@ -1,7 +1,7 @@
 <section>
     <form method="post" action ="/createGame">
         <input type = "text" name = "name" placeholder = "nom de la partie">
-        <select name = "gameType"> 
+        <select name = "gameType">
             <% for (let i = 0 ; i < types.length ; i++) { %>
             <option value = "<%= types[i].id%>">
                 <%= types[i].name %>

@@ -3,6 +3,7 @@ import pool from "../config/database.js"; // importation pour la connexion à la
 import {v4 as uuidv4} from 'uuid'; // module npm pour la génération d'uuid
 import xss from 'xss'; // module npm pour la protection contre les failles XSS
 import bcrypt from "bcrypt"; // module npm pour crypter les mots de passe
+import {connexion} from "../config/userSession.js";
 
 
 export const register = (req, res) => {
@@ -64,8 +65,7 @@ export const registerSubmit =  (req, res) => {
                 } else {
 
                     // si l'inscription est réussie, on redirige vers la page d'accueil et on connecte l'utilisateur
-                    req.session.isUser = true;
-                    req.session.userId = newUsers.id; // on stocke l'id de l'utilisateur dans la session
+                    connexion(req, newUsers); // on stocke l'id de l'utilisateur dans la session
                     res.redirect('/');
                 }
             });

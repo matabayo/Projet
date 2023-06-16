@@ -1,5 +1,6 @@
 import pool from '../config/database.js';
 import bcrypt from 'bcrypt';
+import {connexion} from "../config/userSession.js";
 
 // affichage du formulaire de connexion
 export const login =  (req, res) => {
@@ -22,8 +23,7 @@ export const loginSubmit = function (req, res) {
             else {
                 bcrypt.compare(password, result[0].password, (error, isAllowed) => {
                     if (isAllowed) {
-                        req.session.userId = result[0].id;
-                        req.session.role = result[0].role;
+                        connexion(req, result[0]);
                         res.redirect('/user');
                     }
                     else {

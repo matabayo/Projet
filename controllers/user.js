@@ -1,12 +1,13 @@
 import pool from "../config/database.js";
 import { v4 as uuidv4 } from "uuid";
 import xss from "xss";
+// import {connexion} from "../config/userSession.js";
 
 export const User = (req, res) => {
-    let sql = 'SELECT name FROM game INNER JOIN gameUser on gameUser.idGame = game.id INNER JOIN user on user.id = gameUser.idUser';
-    pool.query(sql, (error, posts, fields) => {
+    let sql = 'SELECT name FROM game INNER JOIN gameUser on gameUser.idGame = game.id WHERE idUser = ?' ;
+    pool.query(sql, [req.session.userId], (error, posts, fields) => {
 
-        res.render('layout', { template: 'user', posts: posts });
+        res.render('layout', { template: 'user', posts : posts });
     });
 };
 
@@ -20,12 +21,14 @@ export const addGame = (req, res) => {
 };
 
 export const createGame = (req, res) => {
+    const MASTER_GAME = "MJ";
     // Vérifier si l'utilisateur est connecté et a un ID valide
     if (!req.session.userId) {
         res.status(401).send({ error : 'Utilisateur non authentifié.' });
         return;
     }
-
+    
+    
     const {name, gameType} = req.body;
     const safeName = xss(name);
     
@@ -45,13 +48,15 @@ export const createGame = (req, res) => {
             return;
         }
 
-        // Récupérer l'ID de la partie insérée
+        // Récupérer l'ID de la partie insérée et de l'id utilisateur
         const gameId = newGame.id;
         const gameUserId = uuidv4();
+        const userId = req.session.userId;
+
 
         // Insérer l'association entre l'utilisateur et la partie en tant que MJ dans la table "gameUser"
-        const insertGameUser = 'INSERT INTO gameUser (idGame, idUser, id) VALUES (?, ?, ?)';
-        pool.query(insertGameUser, [gameId, req.session.userId, gameUserId], (error, result) => {
+        const insertGameUser = 'INSERT INTO gameUser (idGame, idUser, id, role) VALUES (?, ?, ?, ?)';
+        pool.query(insertGameUser, [gameId, userId, gameUserId, MASTER_GAME], (error, result) => {
             if (error) {
                 console.error('Erreur lors de l\'association de l\'utilisateur à la partie :', error);
                 res.status(500).send({ error: 'Erreur lors de l\'association de l\'utilisateur à la partie.' });
