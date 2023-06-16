@@ -27,21 +27,10 @@ export const loginSubmit = function (req, res) {
                         res.redirect('/user');
                     }
                     else {
-                        res.redirect('/home');
+                        res.redirect('/');
                     }
                 });
             }
         }
-    });
-};
-
-export const logout =  (req, res) => {
-    req.session.destroy(function (error) {
-        if (error) {
-            console.error(error);
-        }
-        
-        // Redirection sur page d'accueil
-        res.redirect('/');
     });
 };

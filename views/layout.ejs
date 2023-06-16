@@ -12,19 +12,14 @@
 		
 		<a href="/" ><img src="/img/logo.png" alt="Logo du site : plusieurs dés stylisés" class="logo"></a>
 		<h1>JDR France</h1>
-		<nav class="form">
-			<ul>
-				<li>Jeux
-					<li></li>
-					<li></li>
-				</li>
-				<li>
-					<li></li>
-					<li></li>
-				</li>
-			</ul>
-			<a href="/register">Inscription</a>
-			<a href="/login">Connexion</a>
+		<nav class="form">	<% if (locals.userId){ %>
+                
+                <a href ="/logout">Deconnexion</a>
+                <% } else {%>
+                
+                <a href="/register">Inscription</a>
+				<a href="/login">Connexion</a>
+                <% } %>
 		</nav>
 	</header>
 
@@ -32,5 +27,8 @@
 		
 		<%- include(template) -%>
 	</main>
+	
+	<footer></footer>
+	<script language="javascript" src="/index.js"></script>
 </body>
 </html>

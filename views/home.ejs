@@ -23,10 +23,9 @@
 				</li>
 			</ul>
 			
-			<% if (locals.isUser){ %>
-                <a href="/admin"><i class="fa fa-cogs"></i> Administration</a>
+			<% if (locals.userId){ %>
                 
-                <a href ="/disconnetion">Disconnect</a>
+                <a href ="/logout">Deconnexion</a>
                 <% } else {%>
                 
                 <a href="/register">Inscription</a>
@@ -43,4 +42,3 @@
 	<script language="javascript" src="/index.js"></script>
 </body>
 </html>
-

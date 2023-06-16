@@ -28,7 +28,7 @@ app.use(express.urlencoded({extended : true}));
 
 
 app.use(function(req, res, next) {
-    res.locals.connexion = !!req.session.connexion;
+    res.locals = Object.assign(res.locals, req.session);
     next();
 });
 

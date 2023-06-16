@@ -69,3 +69,30 @@ export const createGame = (req, res) => {
 };
 
 // TODO DELETE A FAIRE
+
+export const DeleteUser = (req, res) => 
+{
+
+    //on récupère l'id de l'article à supprimer, il a été passé en paramètre de l'url
+    let id = req.session.userId;
+
+    // requete de suppresion en BDD
+    let sql1 = "DELETE FROM user WHERE id = ? ";
+    let sql2 = 'DELETE FROM articles WHERE id = ?';
+
+    // pool.query(sql1, [id], function (error, result, fields) 
+    // {
+    //     if(error) {console.log("error requête 1");}
+
+        pool.query(sql2, [id], function (error, result) {
+	    if (error) {
+	        console.log(error)
+	        res.status(500).send({
+	            error: 'Error when delete user'
+	        });
+	    } else {
+	        res.status(204).send();
+        }
+
+    });
+};
