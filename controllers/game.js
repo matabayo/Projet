@@ -1,4 +1,9 @@
-import pool from "../config/database.js";
+import pool from "../config/database.js"; // importation pour la connexion à la base de données
+import {v4 as uuidv4} from 'uuid'; // module npm pour la génération d'uuid
+import xss from 'xss'; // module npm pour la protection contre les failles XSS
+import bcrypt from "bcrypt"; // module npm pour crypter les mots de passe
+import {connexion} from "../config/userSession.js";
+
 
 export const Game = (req,res) => {
     res.render('layout', {template: 'game'});

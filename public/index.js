@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         'content-type': 'application/json'
                     }
                 };
-                
+
                 const url = `/user/${id}`;
                 fetch(url, options)
                     .then(function(response) {
@@ -54,7 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         'content-type' : 'application/json'
                     }
                 };
-                const url2 = '/game/${id}'
+                const url2 = `/game/${id}`;
+                fetch(url2, options2)
+                    .then(function() {
+                        
+                    })
+                    .catch((error) => console.log(error));
             }
         })
     }
