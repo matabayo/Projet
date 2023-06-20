@@ -19,6 +19,9 @@ body {
     margin: 0;
 }
 
+a {
+    text-decoration: none;
+}
 
 
 /*******************************************
@@ -60,4 +63,13 @@ body {
 .form {
     /*position : absolute;*/
     z-index: 1000;
+}
+
+/******************************
+******** NAV POSITION *********
+******************************/
+
+.form {
+    display: inline-block;
+    font-style: none;
 }

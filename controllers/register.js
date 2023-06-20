@@ -7,7 +7,9 @@ import {connexion} from "../config/userSession.js";
 
 
 export const register = (req, res) => {
-    res.render('layout', {template: 'register'});
+    
+    // appel de la page register avec l'appel de errorMessage vide
+    res.render('layout', {template: 'register', errorMessage:""});
 };
 
 export const registerSubmit =  (req, res) => {
@@ -36,39 +38,67 @@ export const registerSubmit =  (req, res) => {
         return res.status(400).send('Le mot de passe doit contenir au moins 8 caractères');
     }
     if (safeConfirmPassword !== safePassword ) {
-        return res.status(400).send('La confirmation du mot de passe ne correspond pas');
+        return res.status(400).send('Mot de passe non identique');
     }
 
-    // cryptage du mot de passe avec bcrypt
-    bcrypt.hash(safePassword, 10, function (error, hash) {
+    // vérification en bdd que le pseudo ou l'email ne sont pas déjà utilisé
+    pool.query('SELECT * FROM user WHERE email = ? OR pseudo = ?', [safeEmail, safePseudo], (error, result) => {
         if (error) {
-            console.log(error);
-        } else {
-
-            /* recuperation des données du formulaire dans un objet newUsers composé par id pseudo email password*/
-            const newUsers = {
-                id: uuidv4(), // on génère un id unique avec uuid
-                pseudo: safePseudo,
-                email: safeEmail,
-                password: hash, // le mot de passe crypté
-                role: "player" // par défaut, le role est "player"
-            };
-
-            // requète SQL pour insérer les données du formulaire dans la table users
-            let query = "INSERT INTO user SET ?";
-
-            // execution de la requète SQL avec les données de l'objet newUsers
-            pool.query(query, [newUsers], function (error, result) {
-                if (error) {
-                    console.error(error);
-                    res.status(500).send('Erreur de base de données');
-                } else {
-
-                    // si l'inscription est réussie, on redirige vers la page d'accueil et on connecte l'utilisateur
-                    connexion(req, newUsers); // on stocke l'id de l'utilisateur dans la session
-                    res.redirect('/');
-                }
-            });
+            console.error(error);
+            return res.status(500).send('Erreur de base de données');
         }
-    });
-};
+
+        if (result.length > 0) {
+            
+            let errorMessage ='';
+            if (result[0].email === safeEmail) {
+                errorMessage = 'L\'adresse e-mail est déjà utilisée';
+              } 
+            else if (result[0].pseudo === safePseudo) {
+                errorMessage = 'Le pseudo est déjà utilisé';
+            }
+                    
+        // Si une correspondance est trouvée, cela signifie que l'e-mail ou le pseudo est déjà utilisé
+        //  return res.status(400).send('L\'adresse e-mail ou le pseudo est déjà utilisé');
+         res.render('layout',  {template : 'register', errorMessage : errorMessage});
+        }
+        
+        else {
+            
+    
+                // cryptage du mot de passe avec bcrypt
+                bcrypt.hash(safePassword, 10, function (error, hash) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+            
+                        /* recuperation des données du formulaire dans un objet newUsers composé par id pseudo email password*/
+                        const newUsers = {
+                            id: uuidv4(), // on génère un id unique avec uuid
+                            pseudo: safePseudo,
+                            email: safeEmail,
+                            password: hash, // le mot de passe crypté
+                            role: "player" // par défaut, le role est "player"
+                        };
+            
+                        // requète SQL pour insérer les données du formulaire dans la table users
+                        let query = "INSERT INTO user SET ?";
+            
+                        // execution de la requète SQL avec les données de l'objet newUsers
+                        pool.query(query, [newUsers], function (error, result) {
+                            if (error) {
+                                console.error(error);
+                                res.status(500).send('Erreur de base de données');
+                            } else {
+            
+                                // si l'inscription est réussie, on redirige vers la page d'accueil et on connecte l'utilisateur
+                                connexion(req, newUsers); // on stocke l'id de l'utilisateur dans la session
+                                res.redirect('/user');
+                            }
+                        });
+                    }
+                });
+            }
+         });
+    };
+ 

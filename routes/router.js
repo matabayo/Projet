@@ -9,21 +9,27 @@ const router = express.Router();
 import {listGameType, listGameByType} from "../controllers/homeGameType.js";  //page d'accueil
 import {register, registerSubmit} from "../controllers/register.js";
 import {login, loginSubmit} from "../controllers/login.js";
-import {User,addGame, createGame, DeleteUser} from "../controllers/user.js";
+import {User, DeleteUser} from "../controllers/user.js";
+import {addGame, createGame, DeleteGame} from "../controllers/game.js";
 import {Game} from "../controllers/game.js";
 import {logout} from "../controllers/logout.js";
 //liste des routes
 
-//HOME PAGE
+// HOME PAGE
 router.get('/', listGameType);
 
 // PAGE D'ENREGISTREMENT
 router.get('/register', register);
 
-// ENVOIE DE L'ENREGISTREMENT
+// ENVOI DE L'ENREGISTREMENT
 router.post('/register', registerSubmit);
 
+// SUPPRESSION USER
 router.delete('/user/:id', DeleteUser);
+
+// SUPPRESSION PARTIE
+router.delete('/game/:id', DeleteGame);
+
 // AFFICHAGE DE LA PAGE CONNEXION
 router.get('/login', login);
 
@@ -35,6 +41,7 @@ router.get('/logout', logout);
 
 // AFFICHAGE DES PARTIES SELON LE TYPE DE JEU
 router.get('/gameType/:id', listGameByType);
+
 // PAGE USER
 router.get ('/user', User);
 
