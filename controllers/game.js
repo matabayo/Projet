@@ -80,11 +80,7 @@ export const createGame = (req, res) => {
 
 // TODO LATER MODIFICATION PROFIL
 
-
-// TODO DELETE A FAIRE
-
-
-
+// fonctionn de suppression de partie si l'utilisateur en est le MJ
 export const DeleteGame = (req,res) => {
     let id2 = req.session.userId;
     let idGame = req.params.id;

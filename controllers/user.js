@@ -3,6 +3,8 @@ import { v4 as uuidv4 } from "uuid";
 import xss from "xss";
 // import {connexion} from "../config/userSession.js";
 
+
+// fonction affichant les parties du joueur connecté (MJ or player)
 export const User = (req, res) => {
     // requête pour afficher le nom des parties associés à un joueur
     let sql = `SELECT name, game.id FROM game INNER JOIN gameUser on gameUser.idGame = game.id WHERE idUser = ?`;
@@ -24,8 +26,10 @@ export const User = (req, res) => {
 export const DeleteUser = (req, res) => {
 
     let id = req.params.id;
+    let sqlAdmin = `SELECT * FROM user WHERE role = ?`
 // verification de conformité d'id
-    if(id !== req.session.userId) {
+ 
+    if(!(id === req.session.userId || sqlAdmin.role === "admin")) {
         res.status(403).send('Pas autorisé a supprimer les autres comptes')
         return;
     }

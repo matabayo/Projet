@@ -32,6 +32,19 @@ app.use(function(req, res, next) {
     next();
 });
 
+app.use(function(req,res, next) {
+    const route = parseurl(req).pathname;
+
+    const protectedRoutes = [
+        '/admin'
+    ];
+
+    if(protectedRoutes.indexOf(route) > -1 && !req.session.role === 'admin') {
+        res.redirect('/');
+    } else {
+        next();
+    }
+})
 
 // appel du routeur
 app.use('/', router);
