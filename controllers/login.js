@@ -1,6 +1,15 @@
+// importation des modules nécessaires
+
+// importation pour la connexion à la base de données
 import pool from '../config/database.js';
+
+// module npm pour la génération d'uuid
 import bcrypt from 'bcrypt';
+
+// importation du middleware connexion pour gérer les connexions des utilisateurs
 import {connexion} from "../config/userSession.js";
+
+// fin d'importation des modules
 
 // affichage du formulaire de connexion
 export const login =  (req, res) => {

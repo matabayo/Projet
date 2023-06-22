@@ -1,5 +1,6 @@
 <section>
-    <div class="test"> <img src = "img/background.png" alt="image de fond" class="container"></div>
+    <div class="test"> <img src = "img/background.jpg" alt="image de fond" class="container"></div>
+    <a href="/logout">Deconnexion</a>
     <article class="listGameUser">
          <ul>
             Liste des jeux
@@ -7,7 +8,7 @@
                 <% for(let i =0 ; i < games.length ; i++){ %>
                     <li>
                         <a class="game" href="/game/<%=games[i].id%>"><%=games[i].name%></a>
-                        <button class = "js-remove-game" type = "submit" data-id = '<%=games[i].id%>'>Supprimer la partie</button>
+                        <button class = "js-remove-game" type = "submit" data-id = <%=games[i].id%>>Supprimer la partie</button>
                     </li>
                 <%    }   %>
             

@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const userRemoveButton = document.querySelector('.js-remove-user');
     
     //si il y a une récupération 
-    if (userRemoveButton.length !== 0) {
+    if (userRemoveButton) {
         
         //alors on écoute le click et on applique la function(event) 
         userRemoveButton.addEventListener('click', function(event) {
@@ -25,13 +25,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 };
 
+                // verification que le compte connecté est le même que le compte à supprimer
                 const url = `/user/${id}`;
                 fetch(url, options)
                     .then(function(response) {
                         if(response.ok) {
                             window.location.href ='/logout'
                         } else {
-                            document.querySelector('.hidden').innerHTML = 'Action non autorisé'
+                            document.querySelector('.hidden').innerHTML = 'Suppression du compte non autorisé. Veuillez contactez un administrateur.'
                         }
                     })
                     .catch((err) => console.log(err));
@@ -47,17 +48,26 @@ document.addEventListener('DOMContentLoaded', () => {
         gameRemoveButton.addEventListener('click', (event) => {
             const confirmed2 = confirm('Êtes-vous sûr de vouloir supprimer la partie ?');
             if (confirmed2) {
-                const buttonElement2 =event
+                const buttonElement2 = event.target;
+                const id2 = buttonElement2.getAttribute('data-id');
+                console.log(id2);
+
                 const options2 = {
                     method :'delete',
                     headers : {
                         'content-type' : 'application/json'
                     }
                 };
-                const url2 = `/game/${id}`;
+                const url2 = `/game/${id2}`;
                 fetch(url2, options2)
-                    .then(function() {
-                        
+                    .then(function(response) {
+                        if(response.ok) {
+                            location.reload();
+                        }
+                        else {
+                            console.log(url2);
+                            document.querySelector('.hidden').innerHTML = 'Suppression de la partie non autorisée !'
+                        }
                     })
                     .catch((error) => console.log(error));
             }

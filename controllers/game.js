@@ -78,7 +78,7 @@ export const createGame = (req, res) => {
     });
 };
 
-// MODIFICATION PROFIL
+// TODO LATER MODIFICATION PROFIL
 
 
 // TODO DELETE A FAIRE
@@ -87,21 +87,22 @@ export const createGame = (req, res) => {
 
 export const DeleteGame = (req,res) => {
     let id2 = req.session.userId;
-    console.log("test")
+    let idGame = req.params.id;
     let sql3 = `
     DELETE game
     FROM game
     INNER JOIN gameUser ON game.id = gameUser.idGame
     WHERE game.id = ? AND gameUser.idUser = ? AND gameUser.role = 'MJ'`
 
-    pool.query(sql3, [id], (error,result) => {
+    pool.query(sql3,[idGame, id2], (error,result) => {
         if (error) {
             console.log(error)
             res.status(500).send ({
                 error : 'Error when delete game to user'
             });
+            return;
         }
-        res.redirect('/user')
+        res.status(204).send();
 
     })
 }

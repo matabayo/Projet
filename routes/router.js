@@ -10,8 +10,7 @@ import {listGameType, listGameByType} from "../controllers/homeGameType.js";  //
 import {register, registerSubmit} from "../controllers/register.js";
 import {login, loginSubmit} from "../controllers/login.js";
 import {User, DeleteUser} from "../controllers/user.js";
-import {addGame, createGame, DeleteGame} from "../controllers/game.js";
-import {Game} from "../controllers/game.js";
+import {Game, addGame, createGame, DeleteGame} from "../controllers/game.js";
 import {logout} from "../controllers/logout.js";
 //liste des routes
 
@@ -24,12 +23,6 @@ router.get('/register', register);
 // ENVOI DE L'ENREGISTREMENT
 router.post('/register', registerSubmit);
 
-// SUPPRESSION USER
-router.delete('/user/:id', DeleteUser);
-
-// SUPPRESSION PARTIE
-router.delete('/game/:id', DeleteGame);
-
 // AFFICHAGE DE LA PAGE CONNEXION
 router.get('/login', login);
 
@@ -39,11 +32,14 @@ router.post('/login', loginSubmit);
 // DECONNEXION
 router.get('/logout', logout);
 
-// AFFICHAGE DES PARTIES SELON LE TYPE DE JEU
-router.get('/gameType/:id', listGameByType);
-
 // PAGE USER
 router.get ('/user', User);
+
+// SUPPRESSION USER
+router.delete('/user/:id', DeleteUser);
+
+// AFFICHAGE DES PARTIES SELON LE TYPE DE JEU
+router.get('/gameType/:id', listGameByType);
 
 // PAGE DE LA PARTIE
 router.get('/game', Game);
@@ -53,5 +49,8 @@ router.get('/createGame', addGame);
 
 // ENVOI CREATION DE PARTIE
 router.post('/createGame', createGame);
+
+// SUPPRESSION PARTIE
+router.delete('/game/:id', DeleteGame);
 
 export default router;

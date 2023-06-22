@@ -32,22 +32,6 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.use(function(req, res, next) {
-    const route = parseurl(req);
-    const protectedRoutes = [
-        '/admin',
-        '/add_post',
-        '/edit_post',
-        'delete_post'
-        ];
-    
-    if(protectedRoutes.indexOf(route) > -1 && !connexion(req)) {
-        res.redirect('/');
-    }
-    
-    
-    next();
-});
 
 // appel du routeur
 app.use('/', router);
