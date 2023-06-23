@@ -57,4 +57,6 @@ router.delete('/game/:id', DeleteGame);
 
 // PAGE ADMIN 
 router.get('/admin', Admin);
+
+router.delete('/admin/:id', DeleteUser);
 export default router;

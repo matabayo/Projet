@@ -2,7 +2,9 @@ import express from "express";
 import session from "express-session";
 import router from "./routes/router.js";
 import parseurl from "parseurl";
+import dotenv from "dotenv";
 import {connexion} from "./config/userSession.js";
+dotenv.config;
 
 const app = express();
 const port = 8000;
@@ -13,7 +15,7 @@ const BASE_URL = `http://${hostname}:${port}`;
 app.use(express.static("public"));
 
 app.use(session({
-    secret : 'keyboard relou',
+    secret : process.env.SECRET,
     resave : false,
     saveUninitialized : true,
     cookie : {maxAge : 360000}
