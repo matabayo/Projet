@@ -33,11 +33,14 @@ export const loginSubmit = function (req, res) {
                 bcrypt.compare(password, result[0].password, (error, isAllowed) => {
                     if (isAllowed) {
                         connexion(req, result[0]);
-                        res.redirect('/user');
-                    }
-                    else {
+                        if (result[0].role === 'admin') {
+                          res.redirect('/admin');
+                        } else {
+                          res.redirect('/user');
+                        }
+                      } else {
                         res.redirect('/');
-                    }
+                      }
                 });
             }
         }

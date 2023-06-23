@@ -35,9 +35,11 @@ app.use(function(req, res, next) {
 app.use(function(req,res, next) {
     const route = parseurl(req).pathname;
 
-    const protectedRoutes = [
-        '/admin'
-    ];
+    const protectedRoutes = ['/admin'];
+    const protectedRoutesUser = [
+        '/user',
+        
+    ]
 
     if(protectedRoutes.indexOf(route) > -1 && !req.session.role === 'admin') {
         res.redirect('/');

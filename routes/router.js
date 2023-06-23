@@ -12,6 +12,8 @@ import {login, loginSubmit} from "../controllers/login.js";
 import {User, DeleteUser} from "../controllers/user.js";
 import {Game, addGame, createGame, DeleteGame} from "../controllers/game.js";
 import {logout} from "../controllers/logout.js";
+import {Admin} from "../controllers/admin.js";
+
 //liste des routes
 
 // HOME PAGE
@@ -42,7 +44,7 @@ router.delete('/user/:id', DeleteUser);
 router.get('/gameType/:id', listGameByType);
 
 // PAGE DE LA PARTIE
-router.get('/game', Game);
+router.get('/game/:id', Game);
 
 // PAGE CREATION DE PARTIE
 router.get('/createGame', addGame);
@@ -53,4 +55,6 @@ router.post('/createGame', createGame);
 // SUPPRESSION PARTIE
 router.delete('/game/:id', DeleteGame);
 
+// PAGE ADMIN 
+router.get('/admin', Admin);
 export default router;

@@ -1,20 +1,21 @@
 <section>
-    <a href="/logout">Deconnexion</a>
+    <div class="test">
+      <img src="img/background.jpg" alt="image de fond" class="container">
+    </div>
+    <a href="/logout">Déconnexion</a>
     <article class="listGameUser">
-         <ul>
-            Liste des utilisateurs
-
-                <% for(let i =0 ; i < games.length ; i++){ %>
-                    <li>
-                        <a class="game" href="/game/<%=games[i].id%>"><%=games[i].name%></a>
-                        <button class = "js-remove-game" type = "submit" data-id = <%=games[i].id%>>Supprimer la partie</button>
-                    </li>
-                <%    }   %>
-            
-         </ul>
-         
+      <ul>
+        <% for(let i = 0; i < listGame.length; i++) { %>
+        <li>
+          <a class="pseudo" href ="/user/<%=listGame[i].id %>"><%= listGame[i].pseudo %></a>
+          <a class="game-name" href="/game/<%=listGame[i].id %>"><%= listGame[i].name %></a>
+          <span class="game-type"><%= listGame[i].game_type %></span>
+        </li>
+        <% } %>
+      </ul>
+      <a href="/createGame">Nouvelle partie</a>
     </article>
-    <span class ="hidden"></span>
-    
-         <button type = "submit" class = "js-remove-user" data-id = '<%= locals.userId %>' >Supprimer son compte</button>
-</section>
+    <span class="hidden"></span>
+    <button type="submit" class="js-remove-user" data-id="<%= locals.userId %>">Supprimer son compte</button>
+  </section>
+  
