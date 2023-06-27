@@ -1,21 +1,37 @@
 <section>
-    <div class="test">
-      <img src="img/background.jpg" alt="image de fond" class="container">
-    </div>
-    <a href="/logout">Déconnexion</a>
-    <article class="listGameUser">
-      <ul>
-        <% for(let i = 0; i < listGame.length; i++) { %>
-        <li>
-          <a class="pseudo" href ="/user/<%=listGame[i].id %>"><%= listGame[i].pseudo %></a>
-          <a class="game-name" href="/game/<%=listGame[i].id %>"><%= listGame[i].name %></a>
-          <span class="game-type"><%= listGame[i].game_type %></span>
-        </li>
+  <div class="test">
+    <img src="img/background.jpg" alt="image de fond" class="container" />
+  </div>
+  <a href="/logout">Déconnexion</a>
+  <article class="listGameUser">
+    <ul>
+      <% for(let i = 0; i < listPlayer.length; i++) { %>
+      <li>
+        <a class="pseudo" href="/user/<%=listPlayer[i].userId %>"
+          ><%= listPlayer[i].pseudo %></a
+        >
+        <!-- faire un if pour afficher uniquement s'il y a des parties à afficher -->
+        <% if(listGames[i].length !== 0) { %>
+          <ul>
+            <% for(let j = 0 ; j < listGames[i].length; j++) { %>
+              <li>
+                <a class="game-name" href="/game/<%= listGames[i][j].idGame %>">
+                <%= listGames[i][j].nameGame %></a>
+                <span class="game-type"><%= listGames[i][j].typeName %></span>
+              </li>
+            <% } %>
+          </ul>
         <% } %>
-      </ul>
-      <a href="/createGame">Nouvelle partie</a>
-    </article>
-    <span class="hidden"></span>
-    <button type="submit" class="js-remove-user" data-id="<%= locals.userId %>">Supprimer son compte</button>
-  </section>
-  
+        <button type="submit" class="js-remove-user" data-id="<%= listPlayer[i].userId %>">
+          Suppression du compte
+        </button>
+      </li>
+      <% } %>
+    </ul>
+    <a href="/createGame">Nouvelle partie</a>
+  </article>
+  <span class="hidden"></span>
+  <button type="submit" class="js-remove-user" data-id="<%= locals.userId %>">
+    Supprimer son compte
+  </button>
+</section>

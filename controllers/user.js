@@ -26,10 +26,10 @@ export const User = (req, res) => {
 export const DeleteUser = (req, res) => {
 
     let id = req.params.id;
-    let sqlAdmin = `SELECT * FROM user WHERE role = ?`
 // verification de conformité d'id
- 
-    if(!(id === req.session.userId || sqlAdmin.role === "admin")) {
+    console.log(req.session)
+    console.log(id)
+    if(!(id === req.session.userId || req.session.role === "admin")) {
         res.status(403).send('Pas autorisé a supprimer les autres comptes')
         return;
     }

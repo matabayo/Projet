@@ -42,38 +42,42 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const gameRemoveButton = document.querySelector('.js-remove-game');
+    const gameRemoveButtons = document.querySelectorAll('.js-remove-game');
 
-    if(gameRemoveButton) {
-        gameRemoveButton.addEventListener('click', (event) => {
-            const confirmed2 = confirm('Êtes-vous sûr de vouloir supprimer la partie ?');
-            if (confirmed2) {
-                const buttonElement2 = event.target;
-                const id2 = buttonElement2.getAttribute('data-id');
-                console.log(id2);
-
-                const options2 = {
-                    method :'delete',
-                    headers : {
-                        'content-type' : 'application/json'
-                    }
-                };
-                const url2 = `/game/${id2}`;
-                fetch(url2, options2)
-                    .then(function(response) {
-                        if(response.ok) {
-                            location.reload();
+    if(gameRemoveButtons.length > 0) {
+        gameRemoveButtons.forEach((button) => {
+            button.addEventListener('click', (event) =>{
+                const confirmed2 = confirm('Êtes-vous sûr de vouloir supprimer la partie ?');
+                if (confirmed2) {
+                    const buttonElement2 = event.target;
+                    const id2 = buttonElement2.getAttribute('data-id');
+                    console.log(id2);
+    
+                    const options2 = {
+                        method :'delete',
+                        headers : {
+                            'content-type' : 'application/json'
                         }
-                        else {
-                            console.log(url2);
-                            document.querySelector('.hidden').innerHTML = 'Suppression de la partie non autorisée !'
-                        }
-                    })
-                    .catch((error) => console.log(error));
-            }
+                    };
+                    const url2 = `/game/${id2}`;
+                    fetch(url2, options2)
+                        .then(function(response) {
+                            if(response.ok) {
+                                location.reload();
+                            }
+                            else {
+                                console.log(url2);
+                                document.querySelector('.hidden').innerHTML = 'Suppression de la partie non autorisée !'
+                            }
+                        })
+                        .catch((error) => console.log(error));
+                }
+            })
         })
     }
 })
+
+  
 
 // function editPostEventListener(event) {
 //     event.preventDefault();
