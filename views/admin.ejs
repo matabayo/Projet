@@ -18,6 +18,7 @@
                 <a class="game-name" href="/game/<%= listGames[i][j].idGame %>">
                 <%= listGames[i][j].nameGame %></a>
                 <span class="game-type"><%= listGames[i][j].typeName %></span>
+                <button class = "js-remove-game" type = "submit" data-id = <%=listGames[i][j].idGame%>>Supprimer la partie</button>
               </li>
             <% } %>
           </ul>

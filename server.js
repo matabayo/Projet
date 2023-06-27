@@ -43,7 +43,7 @@ app.use(function(req,res, next) {
         
     ]
 
-    if(protectedRoutes.indexOf(route) > -1 && !req.session.role === 'admin') {
+    if(protectedRoutes.indexOf(route) > -1 && req.session.role !== 'admin') {
         res.redirect('/');
     } else {
         next();

@@ -2,46 +2,45 @@
 // ecoute des evenements sur les pages
 document.addEventListener('DOMContentLoaded', function() {
     // recuperation du button pour supprimer son compte avec la class du button
-    const userRemoveButton = document.querySelector('.js-remove-user');
+    const userRemoveButtons = document.querySelectorAll('.js-remove-user');
     
     //si il y a une récupération 
-    if (userRemoveButton) {
+    if (userRemoveButtons.length > 0) {
         
-        //alors on écoute le click et on applique la function(event) 
-        userRemoveButton.addEventListener('click', function(event) {
-
-            // on affiche la confirmation de suppression de compte (pour éviter une suppression par mégarde)
+        userRemoveButtons.forEach((button) => {
+            button.addEventListener('click', (event) => {
+                   // on affiche la confirmation de suppression de compte (pour éviter une suppression par mégarde)
             const confirmed = confirm('Êtes-vous sûr de vouloir supprimer votre compte ?');
             
             // si il y a confirmation on effectue dans le back (controller concerner)
-            if (confirmed) {
-                const buttonElement = event.target;
-                const id = buttonElement.getAttribute('data-id');
+                if (confirmed) {
+                    const buttonElement = event.target;
+                    const id = buttonElement.getAttribute('data-id');
 
-                const options = {
-                    method: 'delete',
-                    headers: {
-                        'content-type': 'application/json'
-                    }
-                };
-
-                // verification que le compte connecté est le même que le compte à supprimer
-                const url = `/user/${id}`;
-                fetch(url, options)
-                    .then(function(response) {
-                        if(response.ok) {
-                            window.location.href ='/logout'
-                        } else {
-                            document.querySelector('.hidden').innerHTML = 'Suppression du compte non autorisé. Veuillez contactez un administrateur.'
+                    const options = {
+                        method: 'delete',
+                        headers: {
+                            'content-type': 'application/json'
                         }
-                    })
-                    .catch((err) => console.log(err));
-            }
-        });
-    }
-});
+                    };
 
-document.addEventListener('DOMContentLoaded', () => {
+                    // verification que le compte connecté est le même que le compte à supprimer
+                    const url = `/user/${id}`;
+                    fetch(url, options)
+                        .then(function(response) {
+                            if(response.ok) {
+                                window.location.href ='/logout'
+                            } else {
+                                document.querySelector('.hidden').innerHTML = 'Suppression du compte non autorisé. Veuillez contactez un administrateur.'
+                            }
+                        })
+                        .catch((err) => console.log(err));
+                }
+
+            })
+        })
+         
+    }
     const gameRemoveButtons = document.querySelectorAll('.js-remove-game');
 
     if(gameRemoveButtons.length > 0) {
@@ -75,9 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
         })
     }
-})
-
-  
+});
 
 // function editPostEventListener(event) {
 //     event.preventDefault();

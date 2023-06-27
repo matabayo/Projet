@@ -34,7 +34,6 @@ export const Admin = (req, res) => {
                     if(error) {
                         reject(error)
                     }
-                    console.log(listGame);
                     resolve(listGame);
                 })
             })

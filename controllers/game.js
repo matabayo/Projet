@@ -2,6 +2,7 @@ import pool from "../config/database.js"; // importation pour la connexion à la
 import {v4 as uuidv4} from 'uuid'; // module npm pour la génération d'uuid
 import xss from 'xss'; // module npm pour la protection contre les failles XSS
 import bcrypt from "bcrypt"; // module npm pour crypter les mots de passe
+import url from "url";
 import {connexion} from "../config/userSession.js";
 
 
@@ -71,6 +72,9 @@ export const createGame = (req, res) => {
                 res.status(500).send({ error: 'Erreur lors de l\'association de l\'utilisateur à la partie.' });
                 return;
             }
+            // Générer l'URL complète de la partie en utilisant l'ID généré
+            const baseUrl = req.protocol + '://' + req.get('host'); // Récupérer la base de l'URL
+            const gameUrl = url.resolve(baseUrl, `/game/${gameID}`);
 
             // TODO PENSEZ A REDIRIGER VERS LA PAGE GAME
             res.redirect('/user');
@@ -84,21 +88,45 @@ export const createGame = (req, res) => {
 export const DeleteGame = (req,res) => {
     let id2 = req.session.userId;
     let idGame = req.params.id;
-    let sql3 = `
-    DELETE game
-    FROM game
-    INNER JOIN gameUser ON game.id = gameUser.idGame
-    WHERE game.id = ? AND gameUser.idUser = ? AND gameUser.role = 'MJ'`
+    let role = req.session.role;
 
-    pool.query(sql3,[idGame, id2], (error,result) => {
-        if (error) {
-            console.log(error)
-            res.status(500).send ({
-                error : 'Error when delete game to user'
-            });
-            return;
-        }
-        res.status(204).send();
 
-    })
+    if(role === 'admin') { 
+
+        let sqlAdmin = `
+        DELETE game
+        FROM game
+        WHERE game.id = ?`
+
+        pool.query(sqlAdmin, [idGame, role], (error, result)=> {
+            if(error) {
+                console.log(error)
+                res.status(500).send({
+                    error : 'You are not an admin !'
+                });
+                return;
+            }
+            res.status(204).send();
+        })
+    } else {
+
+        let sql3 = `
+        DELETE game
+        FROM game
+        INNER JOIN gameUser ON game.id = gameUser.idGame
+        WHERE game.id = ? AND gameUser.idUser = ? AND gameUser.role = 'MJ'`
+
+        pool.query(sql3,[idGame, id2], (error,result) => {
+            if (error) {
+                console.log(error)
+                res.status(500).send ({
+                    error : 'Error when delete game to user'
+                });
+                return;
+            }
+            res.status(204).send();
+
+        })
+    }
 }
+
