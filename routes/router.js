@@ -14,6 +14,18 @@ import {Game, addGame, createGame, DeleteGame} from "../controllers/game.js";
 import {logout} from "../controllers/logout.js";
 import {Admin} from "../controllers/admin.js";
 
+
+// MIDDLEWARE DE CONTROLE D'ACCES
+
+const adminMiddleware = (roles) => (req, res, next) => {
+    if(roles.includes(req.session.role)) {
+        next();
+    }
+    else {
+        res.redirect('/');
+    }
+}
+
 //liste des routes
 
 // HOME PAGE
@@ -35,29 +47,32 @@ router.post('/login', loginSubmit);
 router.get('/logout', logout);
 
 // PAGE USER
-router.get ('/user', User);
+router.get ('/user',adminMiddleware(['player', 'admin']), User);
 
 // SUPPRESSION USER
-router.delete('/user/:id', DeleteUser);
+router.delete('/user/:id',adminMiddleware(['player', 'admin']), DeleteUser);
 
 // AFFICHAGE DES PARTIES SELON LE TYPE DE JEU
-router.get('/gameType/:id', listGameByType);
+router.get('/gameType/:id',adminMiddleware(['player', 'admin']), listGameByType);
 
 // PAGE DE LA PARTIE
-router.get('/game/:id', Game);
+router.get('/game/:id',adminMiddleware(['player', 'admin']), Game);
 
 // PAGE CREATION DE PARTIE
-router.get('/createGame', addGame);
+router.get('/createGame',adminMiddleware(['player', 'admin']), addGame);
 
 // ENVOI CREATION DE PARTIE
-router.post('/createGame', createGame);
+router.post('/createGame',adminMiddleware(['player', 'admin']), createGame);
 
 // SUPPRESSION PARTIE
-router.delete('/game/:id', DeleteGame);
+router.delete('/game/:id',adminMiddleware(['player', 'admin']), DeleteGame);
 
 // PAGE ADMIN 
-router.get('/admin', Admin);
+router.get('/admin',adminMiddleware(['admin']), Admin);
 
 // SUPPRESSION DE JOUEURS PAR L'ADMIN
-router.delete('/admin/:id', DeleteUser);
+router.delete('/admin/:id',adminMiddleware(['admin']), DeleteUser);
+
+router.all("/*", (req,res) =>{res.status(404).render('NOT_FOUND')})
+
 export default router;

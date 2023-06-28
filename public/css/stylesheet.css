@@ -1,3 +1,18 @@
+/******************************************
+************* FONT-FACE *******************
+******************************************/
+@font-face {
+    font-family: 'Mitr';
+    src: url('../font/Mitr-Regular.ttf') format('ttf');
+}
+
+@font-face {
+    font-family: 'OpenDyslexic';
+    src: url('../font/OpenDyslexic-Regular.woff') format('woff');
+}
+
+
+
 /*******************************************
 ***************style general****************
 *******************************************/
@@ -17,12 +32,12 @@ html {
 body {
     font-size: 1.6rem;
     margin: 0;
+    font-family: 'Mitr', sans-serif;
 }
 
 a {
     text-decoration: none;
 }
-
 
 /*******************************************
 *************** style logo *****************
@@ -73,3 +88,11 @@ a {
     display: inline-block;
     font-style: none;
 } */
+
+.dyslexie {
+    font-family: 'OpenDyslexic', sans-serif;
+  }
+
+  /* .hidden {
+    display: none;
+  } */

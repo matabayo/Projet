@@ -76,6 +76,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    let dyslexie = false;
+    let dyslexieButton = document.getElementById('dyslexie');
+
+    dyslexieButton.addEventListener('click', () => {
+        dyslexie = !dyslexie;
+        dyslexieButton.classList.toggle('active');
+        if (dyslexie) {
+            document.body.classList.add('dyslexie');
+        } else {
+            document.body.classList.remove('dyslexie');
+        }
+    });
+});
+
 // function editPostEventListener(event) {
 //     event.preventDefault();
 //     const form = event.target.parentElement;

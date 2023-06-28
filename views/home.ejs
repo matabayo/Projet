@@ -12,11 +12,15 @@
 		
 		<a href="/" ><img src="/img/logo.png" alt="Logo du site : plusieurs dés stylisés" class="logo"></a>
 		<h1>JDR France</h1>
+		
+		<div class="test">
+			<img src="img/background.jpg" alt="image de fond" class="container" />
+		  </div>
 		<nav class="form">
 			<ul>
 				<li>Jeux
 					<% for (let i = 0 ; i < lists.length ; i++) { %>
-					<li>
+					<li class = "hidden">
 						<a href ="/gameType/<%= lists[i].id%>" ><%= lists[i].name %></a>
 					</li>
 					<% } %>
@@ -33,6 +37,8 @@
 				<a href="/login">Connexion</a>
                 <% } %>
 		</nav>
+		
+		<button id = "dyslexie">Dyslexique</button>
 	</header>
 
 	<main>

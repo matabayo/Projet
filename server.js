@@ -34,21 +34,44 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.use(function(req,res, next) {
-    const route = parseurl(req).pathname;
 
-    const protectedRoutes = ['/admin'];
-    const protectedRoutesUser = [
-        '/user',
+
+app.use(function (req, res, next) {
+	res.locals.admin = req.session.role === 'admin' ? true : false;
+	res.locals.player = req.session.role === 'player' ? true : false;
+	next();
+});
+// app.use( (req,res,next) => {
+//     const routeUser = parseurl(req).pathname;
+//     const protectedRoutesUser = [
+//         '/user',
+//         '/createGame',
+//         '/game',
+//         '/gameType'
         
-    ]
+//     ]
+    
+//     if(protectedRoutesUser.indexOf(routeUser) > -1 && req.session.role !== 'player') {
+//         res.redirect('/');
+//     }
+//      else {
+//         next();
+//     }
+// })
 
-    if(protectedRoutes.indexOf(route) > -1 && req.session.role !== 'admin') {
-        res.redirect('/');
-    } else {
-        next();
-    }
-})
+// app.use(function(req,res, next) {
+//     const route = parseurl(req).pathname;
+
+//     const protectedRoutes = ['/admin'];
+    
+
+//     if(protectedRoutes.indexOf(route) > -1 && req.session.role !== 'admin') {
+//         res.redirect('/');
+//     }
+//      else {
+//         next();
+//     }
+// })
 
 // appel du routeur
 app.use('/', router);

@@ -74,7 +74,7 @@ export const createGame = (req, res) => {
             }
             // Générer l'URL complète de la partie en utilisant l'ID généré
             const baseUrl = req.protocol + '://' + req.get('host'); // Récupérer la base de l'URL
-            const gameUrl = url.resolve(baseUrl, `/game/${gameID}`);
+            const gameUrl = url.resolve(baseUrl, `/game/${gameId}`);
 
             // TODO PENSEZ A REDIRIGER VERS LA PAGE GAME
             res.redirect('/user');
@@ -84,13 +84,13 @@ export const createGame = (req, res) => {
 
 // TODO LATER MODIFICATION PROFIL
 
-// fonctionn de suppression de partie si l'utilisateur en est le MJ
+// fonction de suppression de partie si l'utilisateur en est le MJ
 export const DeleteGame = (req,res) => {
     let id2 = req.session.userId;
     let idGame = req.params.id;
     let role = req.session.role;
 
-
+    // Si le rôle est admin il peut supprimer la partie
     if(role === 'admin') { 
 
         let sqlAdmin = `
@@ -108,6 +108,8 @@ export const DeleteGame = (req,res) => {
             }
             res.status(204).send();
         })
+
+        // autrement on vérifie si l'utilisateur connecté a bien le rôle MJ pour la partie, si oui il peut supprimer sinon il reçoit un message d'erreur
     } else {
 
         let sql3 = `
