@@ -9,6 +9,8 @@ export const Admin = (req, res) => {
     FROM user
     ORDER BY pseudo ASC;
 `;
+
+    // 
     pool.query(sql, async (error, listPlayer) => {
 
         if(error) {
