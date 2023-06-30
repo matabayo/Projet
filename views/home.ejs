@@ -8,41 +8,39 @@
 	<title>JDR France</title>
 </head>
 <body>
+	
 	<header>
-		
-		<a href="/" ><img src="/img/logo.png" alt="Logo du site : plusieurs dés stylisés" class="logo"></a>
-		<h1>JDR France</h1>
-		
-		<div class="test">
-			<img src="img/background.jpg" alt="image de fond" class="container" />
-		  </div>
-		<nav class="form">
-			<ul>
-				<li>Jeux
-					<% for (let i = 0 ; i < lists.length ; i++) { %>
-					<li class = "hidden">
-						<a href ="/gameType/<%= lists[i].id%>" ><%= lists[i].name %></a>
-					</li>
-					<% } %>
-				</li>
-			</ul>
+		<div class = "test">
+			<a href="/" ><img src="/img/logo.png" alt="Logo du site : plusieurs dés stylisés" class="logo"></a>
+			<h1>JDR France</h1>
 			
-			<% if (locals.userId){ %>
-                
-                <a href ="/logout">Deconnexion</a>
-				<a href ="/user">Profil</a>
-                <% } else {%>
-                
-                <a href="/register">Inscription</a>
-				<a href="/login">Connexion</a>
-                <% } %>
-		</nav>
-		
-		<button id = "dyslexie">Dyslexique</button>
+			<nav class="form">
+				<ul>
+					<li>Jeux
+						<% for (let i = 0 ; i < lists.length ; i++) { %>
+						<li class = "hidden">
+							<a href ="/gameType/<%= lists[i].id%>" class = 'white'><%= lists[i].name %></a>
+						</li>
+						<% } %>
+					</li>
+				</ul>
+				
+				<% if (locals.userId){ %>
+					
+					<a href ="/logout">Deconnexion</a>
+					<a href ="/user">Profil</a>
+					<% } else {%>
+					
+					<a href="/register" class = 'white'>Inscription</a>
+					<a href="/login" class = 'white'>Connexion</a>
+					<% } %>
+			</nav>
+			
+			<button id = "dyslexie" class = "button">Dyslexique</button>
+		</div>
 	</header>
 
 	<main>
-		<div class="test"> <img src = "/img/background.jpg" alt="image de fond" class="container"></div>
 	</main>
 	
 	<footer></footer>

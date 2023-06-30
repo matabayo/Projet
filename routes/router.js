@@ -47,25 +47,25 @@ router.post('/login', loginSubmit);
 router.get('/logout', logout);
 
 // PAGE USER
-router.get ('/user',adminMiddleware(['player', 'admin']), User);
+router.get ('/user/:id',adminMiddleware(['admin', 'player']), User);
 
 // SUPPRESSION USER
-router.delete('/user/:id',adminMiddleware(['player', 'admin']), DeleteUser);
+router.delete('/user/:id',adminMiddleware(['admin', 'player']), DeleteUser);
 
 // AFFICHAGE DES PARTIES SELON LE TYPE DE JEU
-router.get('/gameType/:id',adminMiddleware(['player', 'admin']), listGameByType);
+router.get('/gameType/:id',adminMiddleware(['admin', 'player']), listGameByType);
 
 // PAGE DE LA PARTIE
-router.get('/game/:id',adminMiddleware(['player', 'admin']), Game);
+router.get('/game/:id',adminMiddleware(['admin', 'player']), Game);
 
 // PAGE CREATION DE PARTIE
-router.get('/createGame',adminMiddleware(['player', 'admin']), addGame);
+router.get('/createGame',adminMiddleware(['admin', 'player']), addGame);
 
 // ENVOI CREATION DE PARTIE
-router.post('/createGame',adminMiddleware(['player', 'admin']), createGame);
+router.post('/createGame',adminMiddleware(['admin', 'player']), createGame);
 
 // SUPPRESSION PARTIE
-router.delete('/game/:id',adminMiddleware(['player', 'admin']), DeleteGame);
+router.delete('/game/:id',adminMiddleware(['admin', 'player']), DeleteGame);
 
 // PAGE ADMIN 
 router.get('/admin',adminMiddleware(['admin']), Admin);

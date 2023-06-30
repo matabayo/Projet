@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     };
 
                     // verification que le compte connecté est le même que le compte à supprimer
+                    const role = req.sessions.role;
                     const url = `/user/${id}`;
                     fetch(url, options)
                         .then(function(response) {

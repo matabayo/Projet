@@ -36,7 +36,7 @@ export const loginSubmit = function (req, res) {
                         if (result[0].role === 'admin') {
                           res.redirect('/admin');
                         } else {
-                          res.redirect('/user');
+                          res.redirect('/user/:id');
                         }
                       } else {
                         res.redirect('/');

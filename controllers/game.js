@@ -77,7 +77,7 @@ export const createGame = (req, res) => {
             const gameUrl = url.resolve(baseUrl, `/game/${gameId}`);
 
             // TODO PENSEZ A REDIRIGER VERS LA PAGE GAME
-            res.redirect('/user');
+            res.redirect(`/user/${userId}`);
         });
     });
 };
