@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     };
 
                     // verification que le compte connecté est le même que le compte à supprimer
-                    const role = req.sessions.role;
+                    // const role = req.sessions.role;
                     const url = `/user/${id}`;
                     fetch(url, options)
                         .then(function(response) {
@@ -77,20 +77,22 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    let dyslexie = false;
-    let dyslexieButton = document.getElementById('dyslexie');
 
+document.addEventListener('DOMContentLoaded', () => {
+    let dyslexie = localStorage.getItem('dyslexieState') === 'true';
+    let dyslexieButton = document.getElementById('dyslexie');
+  
+    dyslexieButton.classList.toggle('active', dyslexie);
+    document.body.classList.toggle('dyslexie', dyslexie);
+  
     dyslexieButton.addEventListener('click', () => {
-        dyslexie = !dyslexie;
-        dyslexieButton.classList.toggle('active');
-        if (dyslexie) {
-            document.body.classList.add('dyslexie');
-        } else {
-            document.body.classList.remove('dyslexie');
-        }
+      dyslexie = !dyslexie;
+      dyslexieButton.classList.toggle('active', dyslexie);
+      document.body.classList.toggle('dyslexie', dyslexie);
+      localStorage.setItem('dyslexieState', dyslexie.toString());
     });
-});
+  });
+  
 
 // function editPostEventListener(event) {
 //     event.preventDefault();
@@ -113,3 +115,4 @@ document.addEventListener('DOMContentLoaded', () => {
 //         body: JSON.stringify(data)
 //     };
 // }
+
