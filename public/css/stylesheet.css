@@ -2,42 +2,37 @@
 ************* FONT-FACE *******************
 ******************************************/
 @font-face {
-    font-family: 'Mitr';
-    src: url('../font/Mitr-Regular.ttf') format('ttf');
+  font-family: "Mitr";
+  src: url("../font/Mitr-Regular.ttf") format("ttf");
 }
 
 @font-face {
-    font-family: 'OpenDyslexic';
-    src: url('../font/OpenDyslexic-Regular.woff') format('woff');
+  font-family: "OpenDyslexic";
+  src: url("../font/OpenDyslexic-Regular.woff") format("woff");
 }
-
-
 
 /*******************************************
 ***************style general****************
 *******************************************/
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
-
 
 html {
-    font-size: 62.5%;
-    padding : 0;
+  font-size: 62.5%;
+  padding: 0;
 }
 
-
-
 body {
-    font-size: 1.6rem;
-    margin: 0;
-    font-family: 'Mitr', sans-serif;
-    position : relative;
+  font-size: 1.6rem;
+  margin: 0;
+  font-family: "Mitr", sans-serif;
+  position: relative;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 /*******************************************
@@ -45,40 +40,29 @@ a {
 *******************************************/
 
 .logo {
-    /*position: relative;*/
-    width: 10%;
-
+  /*position: relative;*/
+  width: 10%;
 }
 .img {
-    width: 3rem;
+  width: 3rem;
 }
 
 /******************************************
 *************background style**************
 ******************************************/
 .position {
-    position : absolute;
-}
-
-.test {
-    display: flex;
-    /*position: absolute;*/
-    left: 0;
-    top: 0;
-    width: 100%;
-    z-index: 1;
-    overflow: hidden;
+  position: absolute;
 }
 
 .container {
-    opacity: 0.6;
-	max-width: 100%;
-	height: auto;
+  opacity: 0.6;
+  max-width: 100%;
+  height: auto;
 }
 
 .form {
-    /*position : absolute;*/
-    z-index: 1000;
+  /*position : absolute;*/
+  z-index: 1000;
 }
 
 /******************************
@@ -91,40 +75,50 @@ a {
 } */
 
 .dyslexie {
-    font-family: 'OpenDyslexic', sans-serif;
-  }
+  font-family: "OpenDyslexic", sans-serif;
+}
 
-
-
-  /*************************************************
+/*************************************************
   ****************** HEADER ************************
   *************************************************/
 
-  header {
-    background-image: url('../img/background.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    color : rgb(0, 0, 0);
-    /* position : fixed; */
-    top : 0em;
-  }
-/* .test {
-    position: relative;
-    background-color: rgba(77,77,77,0.6);
-} */
-  .form {
-    color : rgb(37, 15, 235);
+header {
+  background-image: url("../img/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: rgb(0, 0, 0);
+  top: 0em;
+}
 
-  }
+.test {
+  display: flex;
+  /*position: absolute;*/
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
 
-  .white {
-    color : rgb(255, 255, 255);
-  }
+.test a img{
+    position : absolute;
+    top : 0;
+    left : 0;
+    width : 20%;
+}
 
-  h1 {
-    position : fixed;
-    top : 0.1em;
-    left : 25%;
-    padding : 0;
-    margin : 0;
-  }
+.form {
+  color: rgb(37, 15, 235);
+}
+
+.white {
+  color: rgb(255, 255, 255);
+}
+
+h1 {
+  position: fixed;
+  top: 0.1em;
+  left: 25%;
+  padding: 0;
+  margin: 0;
+}
