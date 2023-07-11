@@ -104,7 +104,7 @@ export const registerSubmit =  (req, res) => {
             
                                 // si l'inscription est réussie, on redirige vers la page d'accueil et on connecte l'utilisateur
                                 connexion(req, newUsers); // on stocke l'id de l'utilisateur dans la session
-                                res.redirect('/user');
+                                res.redirect(`/user`);
                             }
                         });
                     }

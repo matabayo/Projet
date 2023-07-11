@@ -9,39 +9,60 @@
 </head>
 <body>
 	
-	<header>
-		<div class = "test">
-			<a href="/" ><img src="/img/logo.png" alt="Logo du site : plusieurs dés stylisés" class="logo"></a>
-			<h1>JDR France</h1>
-			
+	<header class = "header">
+		<div class = "logo_bloc">
+			<a href="/" class= "image"><img src="/img/logo.png" alt="Logo du site : plusieurs dés stylisés" class="logo"></a>
+		</div>
+
+		<h1 class = "titre">JDR France</h1>
+
+		<button id = "dyslexie" class = "button">Dyslexique</button>
+		
+		<div>
 			<nav class="form">
-				<ul>
-					<li>Jeux
-						<% for (let i = 0 ; i < lists.length ; i++) { %>
-						<li class = "hidden">
-							<a href ="/gameType/<%= lists[i].id%>" class = 'white'><%= lists[i].name %></a>
-						</li>
-						<% } %>
-					</li>
-				</ul>
-				
 				<% if (locals.userId){ %>
-					
+						
 					<a href ="/logout">Deconnexion</a>
-					<a href ="/user">Profil</a>
+					<a href ="/user/:id">Profil</a>
 					<% } else {%>
-					
+						
 					<a href="/register" class = 'white'>Inscription</a>
 					<a href="/login" class = 'white'>Connexion</a>
 					<% } %>
 			</nav>
-			
-			<button id = "dyslexie" class = "button">Dyslexique</button>
 		</div>
+
 	</header>
 
+
 	<main>
+		<select>
+			<option disabled selected>Sélectionnez un jeu</option>
+			<% for (let i = 0; i < lists.length; i++) { %>
+			  <option value="/gameType/<%= lists[i].id %>"><%= lists[i].name %></option>
+			<% } %>
+		</select>
+		  
+		<section>
+			<article>
+				<h2>Pourquoi ce site ?</h2>
+				<P>L'idée de ce site est venu lors d'une partie de jeu de rôle en ligne sur un site connu en anglais.</P>
+				<p>A plusieurs reprises, j'ai été confronté à un problème de traduction dans les feuilles de personnages qui obligeait les joueurs à retourner voir le livre de règles pour trouver la bonne information.</p>
+				<p>L'objectif est donc de proposer un outil français entièrement gratuit qui permettent d'avoir les bonnes traductions et de ainsi de profiter totalement de ses parties !</p>
+			</article>
+			<article>
+				<h2>Évolutions à venir</h2>
+				<ul>
+					<li>La première évolution à venir sera d'intégrer les feuilles de personnages des systèmes de jeux déjà intégrés.</li>
+					<li>Ensuite il y aura un système de lancer de dés en 3D intégré au site.</li>
+					<li>Dans quelques années j'espère pouvoir intégrer un générateur de map 3D au site pour permettre au joueur principal (MJ) de créer des maps rapidement et facilement et de pouvoir faciliter l'immersion des joueurs.</br>
+					Dans le même style, une personnalisation des tokens des personnages sera possible par le MJ et les joueurs pour permettre de noter des états en jeu ou bien pour symboliser l'évolution du personnage.</li>
+					<li>Peut-être une banque de musiques disponible pendant les parties pour mettre en ambiance selon les situations</li>
+				</ul>
+			</article>
+		</section>
 	</main>
+	
 	
 	<footer></footer>
 	<script language="javascript" src="/js/index.js"></script>

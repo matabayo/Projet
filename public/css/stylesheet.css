@@ -2,8 +2,8 @@
 ************* FONT-FACE *******************
 ******************************************/
 @font-face {
-  font-family: "Mitr";
-  src: url("../font/Mitr-Regular.ttf") format("ttf");
+  font-family: "Kalam";
+  src: url("../font/Kalam-Regular.ttf") format("truetype");
 }
 
 @font-face {
@@ -27,8 +27,13 @@ html {
 body {
   font-size: 1.6rem;
   margin: 0;
-  font-family: "Mitr", sans-serif;
+  font-family: "Kalam", "cursive";
   position: relative;
+  background: radial-gradient(#f5f5dc, #ffffff);
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  color :rgb(52, 52, 68);
 }
 
 a {
@@ -42,9 +47,6 @@ a {
 .logo {
   /*position: relative;*/
   width: 10%;
-}
-.img {
-  width: 3rem;
 }
 
 /******************************************
@@ -79,8 +81,8 @@ a {
 }
 
 /*************************************************
-  ****************** HEADER ************************
-  *************************************************/
+****************** HEADER ************************
+*************************************************/
 
 header {
   background-image: url("../img/background.jpg");
@@ -88,37 +90,53 @@ header {
   background-repeat: no-repeat;
   color: rgb(0, 0, 0);
   top: 0em;
+  /* display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; */
+  height: 20vh;
 }
 
-.test {
-  display: flex;
-  /*position: absolute;*/
-  left: 0;
+
+.logo_bloc {
+  position: absolute;
   top: 0;
-  width: 100%;
-  z-index: 1;
-  overflow: hidden;
+  left: 0;
 }
 
-.test a img{
-    position : absolute;
-    top : 0;
-    left : 0;
-    width : 20%;
+.titre {
+  position: absolute;
+  top: 0.1rem;
+  left: 8.5rem;
+  margin: 0;
 }
 
 .form {
   color: rgb(37, 15, 235);
+  position: absolute;
+  top: 1.5rem;
+  right : 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 2rem;
 }
 
-.white {
-  color: rgb(255, 255, 255);
+.form a {
+  padding : 1rem;
+  color: rgb(0, 0, 0);
 }
 
-h1 {
-  position: fixed;
-  top: 0.1em;
-  left: 25%;
-  padding: 0;
-  margin: 0;
+.button {
+  
+  position: absolute;
+  top: 8rem;
+  left: 1rem;
+}
+
+/*********************************
+************* MAIN ***************
+*********************************/
+
+section {
+  margin: 1rem;
 }

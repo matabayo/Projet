@@ -56,8 +56,11 @@ router.delete('/user/:id',adminMiddleware(['admin', 'player']), DeleteUser);
 router.get('/gameType/:id',adminMiddleware(['admin', 'player']), listGameByType);
 
 // PAGE DE LA PARTIE
-router.get('/game/:id',adminMiddleware(['admin', 'player']), Game);
-
+router.get('/game/:id', adminMiddleware(['admin', 'player']), (req, res) => {
+    
+    res.render('game', { layout: false });
+  });
+  
 // PAGE CREATION DE PARTIE
 router.get('/createGame',adminMiddleware(['admin', 'player']), addGame);
 
