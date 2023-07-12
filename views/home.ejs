@@ -1,41 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="/css/stylesheet.css">
 
-	<title>JDR France</title>
-</head>
-<body>
-	
-	<header class = "header">
-		<div class = "logo_bloc">
-			<a href="/" class= "image"><img src="/img/logo.png" alt="Logo du site : plusieurs dés stylisés" class="logo"></a>
-		</div>
-
-		<h1 class = "titre">JDR France</h1>
-
-		<button id = "dyslexie" class = "button">Dyslexique</button>
-		
-		<div>
-			<nav class="form">
-				<% if (locals.userId){ %>
-						
-					<a href ="/logout">Deconnexion</a>
-					<a href ="/user/:id">Profil</a>
-					<% } else {%>
-						
-					<a href="/register" class = 'white'>Inscription</a>
-					<a href="/login" class = 'white'>Connexion</a>
-					<% } %>
-			</nav>
-		</div>
-
-	</header>
-
-
-	<main>
 		<select>
 			<option disabled selected>Sélectionnez un jeu</option>
 			<% for (let i = 0; i < lists.length; i++) { %>
@@ -43,7 +6,7 @@
 			<% } %>
 		</select>
 		  
-		<section>
+		<section class="accueil">
 			<article>
 				<h2>Pourquoi ce site ?</h2>
 				<P>L'idée de ce site est venu lors d'une partie de jeu de rôle en ligne sur un site connu en anglais.</P>

@@ -16,8 +16,22 @@
 		<h1 class = "titre">JDR France</h1>
 
 		<button id = "dyslexie" class = "button">Dyslexique</button>
-	</header>
+		
+		<div>
+			<nav class="form">
+				<% if (locals.userId){ %>
+						
+					<a href ="/logout">Deconnexion</a>
+					<a href ="/user/:id">Profil</a>
+					<% } else {%>
+						
+					<a href="/register" class = 'white'>Inscription</a>
+					<a href="/login" class = 'white'>Connexion</a>
+					<% } %>
+			</nav>
+		</div>
 
+	</header>
 	<main>
 		
 		<%- include(template) -%>

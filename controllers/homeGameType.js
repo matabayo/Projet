@@ -3,7 +3,7 @@ import pool from "../config/database.js";
 export const listGameType = (req, res) => {
     let sql = 'SELECT * FROM gameType';
     pool.query(sql, (error, lists) =>{
-        res.render('home', {lists : lists});
+        res.render('layout', {template : 'home',lists : lists});
     });
 };
 
